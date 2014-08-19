@@ -210,12 +210,13 @@ function getLevel(level) {
             game_level.number = 25;
             game_level.platform = false;
             game_level.cUp = 0.2;
-            game_level.FC = 0.01;
-          // Вставить постепенное всплытие платформы  
-            /*
-            START_TOP -= 0.1;
-            $(".game-screen__platform").css("bottom", "+="+0.1);
-            */
+            game_level.FC = 0.014;
+            game_level.FCB = 0.015;
+            break;
+        //case 26:
+          // Сделать платформу "Елочкой" и запретить движение в одном направлении
+          //
+            
     }
     return game_level;
 }
@@ -294,12 +295,12 @@ if (game_level.up) {
     
 var cUp = 0; // continue Up
 var DELTA_X = 9;
-var HORISONTAL_FRICTION = 0.025; //0.025
-if (game_level.HF) HORISONTAL_FRICTION = game_level.HF; // LEVEL
-var FRICTION_COEFFICIENT_BACK = 0.022;
-if (game_level.FCB) FRICTION_COEFFICIENT_BACK = game_level.FCB; // LEVEL    
-var FRICTION_COEFFICIENT = 0.007;
-if (game_level.FC) FRICTION_COEFFICIENT = game_level.FC; // LEVEL    
+var HORISONTAL_FRICTION = game_level.HF||0.025; //0.025
+//if (game_level.HF) HORISONTAL_FRICTION = game_level.HF; // LEVEL
+var FRICTION_COEFFICIENT_BACK = game_level.FCB||0.022;
+//if (game_level.FCB) FRICTION_COEFFICIENT_BACK = game_level.FCB; // LEVEL    
+var FRICTION_COEFFICIENT = game_level.FC||0.007;
+//if (game_level.FC) FRICTION_COEFFICIENT = game_level.FC; // LEVEL    
 var currentX = 0;
 var side = "";
 var speed = 0; 
