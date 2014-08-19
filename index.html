@@ -1,0 +1,152 @@
+<!DOCTYPE html><!--HTML5 doctype-->
+<html>
+<head>
+	<title>FeedYourCat</title>
+    <audio src="sound/score.wav" id="score-sound"></audio>
+    <audio src="sound/tryLockedLevel.wav" id="fail-sound"></audio>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+	<style type="text/css">
+		/* Prevent copy paste for all elements except text fields */
+		{ -webkit-user-select:none; -webkit-tap-highlight-color:rgba(255, 255, 255, 0); }
+		input, textarea  { -webkit-user-select:text; }
+		body
+	</style>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<script src='intelxdk.js'></script>
+	<script type="text/javascript">
+		/* Intel native bridge is available */
+		var onDeviceReady=function(){
+		//hide splash screen
+		intel.xdk.device.hideSplashScreen();
+		};
+		document.addEventListener("intel.xdk.device.ready",onDeviceReady,false);
+	</script>
+    <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+</head>
+<body>
+    <div id="main-screen">
+        <div class="game-title">
+            Feed Your Cat!
+            <img src="img/logo.png" width="30" alt="" class="game-title__img game-title__img-ipad" />
+        </div>
+        <div class="content">
+            <div class="toolbar">
+                <p><a class="toolbar__button toolbar__button-ipad" id="start-game__btn">Start Game</a></p>
+                <p><a class="toolbar__button toolbar__button-ipad" id="option__btn">Option</a></p>
+                <p><a class="toolbar__button-ipad toolbar__button" id="exit__btn">Exit</a></p>
+            </div>
+        </div>
+        <div>
+            <img src="img/cat_perfect.png" class="main-screen-cat" id="main-cat"/>
+        </div>
+    </div>
+    <div id="game-screen">
+        <div class="game-screen">
+            <div class="win-menu" id="win">
+                <p><div class="win-menu__text">Perfect!...</div></p>
+                <p><div class="win-menu__text_x1">...But your cat wanna eat more!</div></p>
+                <p>
+                    <div>
+                    <img src="img/star.png" class="win-menu__star" id="1_star"/>
+                    <img src="img/star.png" class="win-menu__star" id="2_star"/>
+                    <img src="img/star.png" class="win-menu__star" id="3_star"/>
+                    </div>
+                </p>
+                <p>
+                    <div class="win-menu__toolbar">
+                        <img src="img/replay.png" class="win-menu__btn" id="replay-button_win"/>
+                        <div class="replay-btn-win" id="win-menu__menu-btn">Menu</div>
+                        <img src="img/next.png" class="win-menu__btn" id="next-level"/>
+                    </div>
+                </p>
+            </div>
+            <div id="game-over">
+                <div class="lose-menu">
+                    <p><div class="lose-menu__text">Your cat is hungry</div></p>
+                    <p><div class="lose-menu__text_xs">Scores: <span id="score-place"></span></div></p>
+                    <p><div class="replay-btn" id="replay-button_lose">Replay</div></p>
+                    <p><div class="replay-btn" id="menu-button_lose">Menu</div></p>
+                </div>
+            </div>
+            <!--<div class="pause-menu" id="pause">
+                <div class="toolbar__button pause-btn">Continue</div>
+                <div class="toolbar__button pause-btn">Menu</div>
+            </div>
+            -->
+            <div class="pause" id="pause-btn">
+                <img src="img/stop.png" class="pause__btn" id="replay__button"/>
+                </BR>
+                <img src="img/pause_on.png" class="pause__btn" id="pause-on__btn"/>
+                <img src="img/pause_off.png" class="pause__btn hidden" id="pause-off__btn"/>
+            </div>
+            <!--<canvas id="draw" class="game-screen__canvas">height="275" width="600" =(</canvas>-->
+            <img src="img/sausage.png" id="sausage" class="game-screen__sausage"/>
+            <img src="img/ipadSausage1px.png" id="sausageIpad" class="game-screen__sausage"/>
+        	<img src="img/1.png" id="platform-img" class="game-screen__platform"/>
+            <div id="cat">
+                <img src="img/cat_left.png" id="cat_left"/>
+                <img src="img/cat_right.png" id="cat_right"/>
+            </div>
+        </div>
+    </div>
+    <!--
+        ==================================================
+    -->
+    <div id="levels">
+        <div class="levels" id="levelList">
+            <!--<div class="levels-cell">
+                <div class="levels__text">1</div>
+                <span><img src="img/star.png" class="levels__star" id="1_star"/></span>
+                <span><img src="img/star.png" class="levels__star" id="2_star"/></span>
+                <span><img src="img/star.png" class="levels__star" id="3_star"/></span>
+            </div>
+            <div class="levels-cell">
+                <div class="levels__text">2</div>
+                <span><img src="img/star.png" class="levels__star" id="1_star"/></span>
+            </div>
+            <div class="levels-cell">
+                <div class="levels__text">3</div>
+                <span><img src="img/star.png" class="levels__star" id="1_star"/></span>
+                <span><img src="img/star.png" class="levels__star" id="2_star"/></span>
+            </div>
+            <div class="levels-cell">
+                <div class="levels__text">4</div>
+                <span><img src="img/star.png" class="levels__star" id="1_star"/></span>
+                <span><img src="img/star.png" class="levels__star" id="2_star"/></span>
+                <span><img src="img/star.png" class="levels__star" id="3_star"/></span>
+            </div>
+            <div class="levels-cell">
+                <div class="levels__text">2</div>
+                <span><img src="img/star.png" class="levels__star"/></span>
+                <span><img src="img/star.png" class="levels__star"/></span>
+                <span><img src="img/star.png" class="levels__star"/></span>
+            </div>-->
+        </div>
+    </div>
+    <div id="option">
+        <div class="option">
+            <p class="option-cell">
+                <input id="Meow" class="css-checkbox" type="checkbox" onchange='toogleSound("Meow")'/>
+                <label for="Meow" name="Meow-label" class="css-label">Meow</label>
+            </p>
+            <p class="option-cell">
+                <input id="Music" class="css-checkbox" type="checkbox" onchange='toogleSound("Music")'/>
+                <label for="Music" name="Music-label" class="css-label">Music</label>
+            </p>
+        </div>
+        <div class="replay-btn option-back-btn" id="option-back-btn">Back</div>
+    </div>
+    <div id="memory" class="background">
+        <div class="memory">
+            <img src="img/testMemorys.jpg" class="minimizeMemory"/>
+        </div>
+        <div class="memory-text">The blessed memory of my cat. Rest In Peace.</div>
+        </div>
+    </div>
+    <script src="js/mechanics.js"></script>
+    <script src="js/levelsPagination.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/joke.js"></script>
+</body>
+</html>
