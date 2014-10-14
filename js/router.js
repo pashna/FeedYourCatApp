@@ -1,14 +1,15 @@
-var currentPage = 0;
-var currentLevel = 0;
-var maxLevel = 35;
-intel.xdk.device.setRotateOrientation("landscape");
+window.currentPage = 0;
+window.currentLevel = 0;
+window.maxLevel = 35;
+window.music = document.getElementById("music-sound");
 
-//intel.xdk.device.hideSplashScreen();
 if ($(window).width() < 1000) // iphone
     $("#pause-btn").after('<canvas id="draw" height="275" width="600">=(</canvas>');
     else 
     $("#pause-btn").after('<canvas id="draw" height="1000" width="1000">=(</canvas>');
+
 $('#bla').after('<div id="space"></div>');
+
 function showGamePage(level) {
     currentLevel = level;
     $("#levels").animate({
@@ -56,62 +57,63 @@ function showOptionPage() {
       }, 400 );
 }
 
-$("#start-game__btn").click(function() {
+$("#start-game__btn").on('click', function() {
     showLevelPage();
 });
 
-$("#option-back-btn").click(function() {
+
+$("#option-back-btn").on('click', function() {
     $("#option").hide();
     showMainPage();
 });
 
-$("#menu-button_lose").click(function() {
+$("#menu-button_lose").on('click', function() {
     $("#game-over").hide();
     showLevelPage();
 });
 
-$("#replay-button_win").click(function() {
+$("#replay-button_win").on('click', function() {
    showGamePage(currentLevel); 
 });
 
-$("#replay-button_lose").click(function() {
+$("#replay-button_lose").on('click', function() {
     $("#game-over").hide();
     showGamePage(currentLevel); 
 });
 
-$("#lose-menu__menu-btn").click(function() {
+$("#lose-menu__menu-btn").on('click', function() {
     $("#game-over").hide();
     showMainPage(); 
 });
 
-$("#next-level").click(function() {
+$("#next-level").on('click', function() {
    showGamePage(++currentLevel); 
 });
 
-$("#win-menu__menu-btn").click(function() {
+$("#win-menu__menu-btn").on('click', function() {
     $("#win").hide();
     showLevelPage();
 });
 
-$("#option__btn").click(function() {
+$("#option__btn").on('click', function() {
    showOptionPage();
 });
 
-$("#exit__btn").click(function() {
-    alert("ЗАКРЫЛОСЬ =(");
+$("#exit__btn").on('click', function() {
+    alert("U rock!");
 });
 
-$("#memory").click(function() {
+$("#memory").on('click', function() {
     $("#memory").hide();
 })
 
-$("#pause-on__btn").click(function() {
+$("#pause-on__btn").on('click', function() {
     window.pause = true;
     $("#pause-on__btn").hide();
     $("#pause-off__btn").show();
 });
 
-$("#pause-off__btn").click(function() {
+$("#pause-off__btn").on('click', function() {
     window.pause = false;
     $("#pause-off__btn").hide();
     $("#pause-on__btn").show();
@@ -164,42 +166,55 @@ document.getElementById("levels").addEventListener("touchend", function(e) {
 //======================================
 if ((intel.xdk.cache.getCookie("meowSound") == undefined)||
     (intel.xdk.cache.getCookie("meowSound") == "on")) {
-    $("#Meow").attr("checked", "checked");
+    $("#Meow").css('bottom', '30px');
+    window.sound = true;
     intel.xdk.cache.setCookie("meowSound", "on", 9999);
 } else {
-        // OFF MEOW
+    window.sound = false;
+    $("#Meow").css('bottom', '0px');
 }
 
 if ((intel.xdk.cache.getCookie("musicSound") == undefined)||
     (intel.xdk.cache.getCookie("musicSound") == "on")){
-    $("#Music").attr("checked", "checked");
+    $("#Music").css('bottom', '30px');
     intel.xdk.cache.setCookie("musicSound", "on", 9999);
+    music.volume = 0.1;
+    music.play();
 } else {
-        // OFF SOUND
+    $("#Music").css('bottom', '0px');
 }
 
 function toogleSound(type) {
     if (type == "Meow") {
         if (intel.xdk.cache.getCookie("meowSound") == "on") {
             intel.xdk.cache.setCookie("meowSound", "off", 9999);
+            window.sound = false;
+            $("#Meow").css('bottom', '0px');
         } 
         else {
             intel.xdk.cache.setCookie("meowSound", "on", 9999);
+            window.sound = true;
+            $("#Meow").css('bottom', '30px');
         }
     }
     
     if (type == "Music") {
         if (intel.xdk.cache.getCookie("musicSound") == "on") {
             intel.xdk.cache.setCookie("musicSound", "off", 9999);
+            music.pause();
+            $("#Music").css('bottom', '0px');
         } 
         else {
             intel.xdk.cache.setCookie("musicSound", "on", 9999);
+            music.play();
+            $("#Music").css('bottom', '30px');
         }
     }
 }
 
 function tryLockLevel() {
-    $("#fail-sound").get(0).play();
+    if (window.sound)
+        $("#fail-sound").get(0).play();
 }
 
 //intel.xdk.cache.clearAllCookies();

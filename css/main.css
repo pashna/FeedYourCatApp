@@ -445,6 +445,7 @@ body {
 .option {
     width: 50%;
     margin-left: 10%;
+    margin-left: 30%;
     height: 60%;
     margin-top: 10%;
     font-size: 25px;
@@ -550,19 +551,21 @@ input[type=checkbox].css-checkbox {
 }
 
 input[type=checkbox].css-checkbox + label.css-label {
-    padding-left:60px;
-    height:30px; 
+    padding-right:60px;
+    /*height:30px; 
     display:inline-block;
     line-height:31px;
     background-repeat:no-repeat;
     background-position: 0 0;
-    font-size:25px;
+    font-size:25px;*/
     vertical-align:middle;
     cursor:pointer;
 }
 
+
 input[type=checkbox].css-checkbox:checked + label.css-label {
-    background-position: 0 -30px;
+    /*background-position: 0 30px;*/
+    padding: 100px
 }
 						
 .css-label{ background-image:url(../img/dark-plus-orange.png); }
@@ -812,6 +815,7 @@ and (max-width : 568px){
         padding: 11px;
     }
     
+    /*
     input[type=checkbox].css-checkbox + label.css-label {
         padding-left: 78px;
 	   font-size: 42px;
@@ -822,7 +826,7 @@ and (max-width : 568px){
         padding-left: 78px;
         font-size: 42px;
         margin-bottom: 50px;
-    }
+    }*/
     
     .option {
         margin-top: 19%;
@@ -835,8 +839,27 @@ and (max-width : 568px){
     
 }
 
-
 /*.game-screen__canvas {
     height: 275px; 
     width: 600px;
 }*/
+
+
+.checkbox {
+    position: relative;
+    bottom: 30px;
+}
+
+.checkbox-container {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    display: inline-block;
+    
+}
+
+.option-cell__text {
+    display: inline-block;
+    margin-right: 20%;
+    font-size: 30px;
+}

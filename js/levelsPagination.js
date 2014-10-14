@@ -1,3 +1,5 @@
+var maxLevel = 35;
+
 function renderLevelPage(page) {
     if (page > ~~(maxLevel/6)) page = ~~(maxLevel/6);
     document.getElementById("levelList").innerHTML = "";

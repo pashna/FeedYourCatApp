@@ -3,7 +3,9 @@
 <head>
 	<title>FeedYourCat</title>
     <audio src="sound/score.wav" id="score-sound"></audio>
+    <audio src="sound/pickUp.wav" id="pickUp-sound"></audio>
     <audio src="sound/tryLockedLevel.wav" id="fail-sound"></audio>
+    <audio src="sound/5CentsBack.wav" loop="loop" volume=0.2 id="music-sound"></audio>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
 	<style type="text/css">
@@ -19,10 +21,13 @@
 		var onDeviceReady=function(){
 		//hide splash screen
 		intel.xdk.device.hideSplashScreen();
+        intel.xdk.device.setRotateOrientation("landscape");
+        document.addEventListener("intel.xdk.device.ready", onDeviceReady, false);
 		};
-		document.addEventListener("intel.xdk.device.ready",onDeviceReady,false);
+        onDeviceReady();
 	</script>
-    <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+    <script type="application/javascript" src="js/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.4.js"></script>
 </head>
 <body>
     <div id="main-screen">
@@ -34,7 +39,7 @@
             <div class="toolbar">
                 <p><a class="toolbar__button toolbar__button-ipad" id="start-game__btn">Start Game</a></p>
                 <p><a class="toolbar__button toolbar__button-ipad" id="option__btn">Option</a></p>
-                <p><a class="toolbar__button-ipad toolbar__button" id="exit__btn">Exit</a></p>
+                <p><a class="toolbar__button-ipad toolbar__button" id="exit__btn">About</a></p>
             </div>
         </div>
         <div>
@@ -69,18 +74,17 @@
                     <p><div class="replay-btn" id="menu-button_lose">Menu</div></p>
                 </div>
             </div>
-            <!--<div class="pause-menu" id="pause">
+            <!--================<div class="pause-menu" id="pause">
                 <div class="toolbar__button pause-btn">Continue</div>
                 <div class="toolbar__button pause-btn">Menu</div>
             </div>
-            -->
+            ================-->
             <div class="pause" id="pause-btn">
                 <img src="img/stop.png" class="pause__btn" id="replay__button"/>
                 </BR>
                 <img src="img/pause_on.png" class="pause__btn" id="pause-on__btn"/>
                 <img src="img/pause_off.png" class="pause__btn hidden" id="pause-off__btn"/>
             </div>
-            <!--<canvas id="draw" class="game-screen__canvas">height="275" width="600" =(</canvas>-->
             <img src="img/sausage.png" id="sausage" class="game-screen__sausage"/>
             <img src="img/ipadSausage1px.png" id="sausageIpad" class="game-screen__sausage"/>
         	<img src="img/1.png" id="platform-img" class="game-screen__platform"/>
@@ -93,9 +97,10 @@
     <!--
         ==================================================
     -->
+    
     <div id="levels">
         <div class="levels" id="levelList">
-            <!--<div class="levels-cell">
+            <div class="levels-cell">
                 <div class="levels__text">1</div>
                 <span><img src="img/star.png" class="levels__star" id="1_star"/></span>
                 <span><img src="img/star.png" class="levels__star" id="2_star"/></span>
@@ -121,32 +126,63 @@
                 <span><img src="img/star.png" class="levels__star"/></span>
                 <span><img src="img/star.png" class="levels__star"/></span>
                 <span><img src="img/star.png" class="levels__star"/></span>
-            </div>-->
+            </div>
         </div>
     </div>
+    <!--
     <div id="option">
         <div class="option">
             <p class="option-cell">
-                <input id="Meow" class="css-checkbox" type="checkbox" onchange='toogleSound("Meow")'/>
-                <label for="Meow" name="Meow-label" class="css-label">Meow</label>
+                <input id="Meow" class="checkbox" type="checkbox" onchange='toogleSound("Meow")'/>
+                <label for="Meow" name="Meow-label" class="css-label">Effects</label>
             </p>
             <p class="option-cell">
                 <input id="Music" class="css-checkbox" type="checkbox" onchange='toogleSound("Music")'/>
                 <label for="Music" name="Music-label" class="css-label">Music</label>
             </p>
+            <p class="option-cell">
+                <input id="Music1" class="css-checkbox" type="checkbox" onchange='toogleSound("Music")'/>
+                <label for="Music1" name="Music-label" class="css-label">Music</label>
+            </p>
+        </div>
+        <div class="replay-btn option-back-btn" id="option-back-btn">Back</div>
+    </div>-->
+
+    <div id="option">
+        <div class="option">
+            <p class="option-cell">
+                <div class="option-cell__text" onclick='toogleSound("Meow")'>Effects</div>
+                <div class="checkbox-container" onclick='toogleSound("Meow")'>
+                    <img id="Meow" src="img/dark-plus-orange.png" class="checkbox"/>
+                </div>
+            </p>
+            <p class="option-cell">
+                <div class="option-cell__text" onclick='toogleSound("Music")'>Music</div>
+                <div class="checkbox-container" onclick='toogleSound("Music")'>
+                    <img id="Music" src="img/dark-plus-orange.png" class="checkbox"/>
+                </div>
+            </p>
+            <!--<p class="option-cell
+">
+                <input id="Music" class="css-checkbox" type="checkbox" onchange='toogleSound("Music")'/>
+                <label for="Music" name="Music-label" class="css-label">Music</label>
+            </p>-->
         </div>
         <div class="replay-btn option-back-btn" id="option-back-btn">Back</div>
     </div>
+
     <div id="memory" class="background">
         <div class="memory">
             <img src="img/testMemorys.jpg" class="minimizeMemory"/>
         </div>
         <div class="memory-text">The blessed memory of my cat. Rest In Peace.</div>
-        </div>
     </div>
+    
+    </div>
+    <script src="js/router.js"></script>
     <script src="js/mechanics.js"></script>
     <script src="js/levelsPagination.js"></script>
-    <script src="js/router.js"></script>
-    <script src="js/joke.js"></script>
+    <script src="js/joke.js"></script>    
+    <!--<script src="js/test.js"></script>-->
 </body>
 </html>

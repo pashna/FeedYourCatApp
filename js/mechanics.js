@@ -214,7 +214,7 @@ function getLevel(level) {
             game_level.FCB = 0.015;
             break;
         //case 26:
-          // Сделать платформу "Елочкой" и запретить движение в одном направлении
+          // Сделать платформу "Елочкой" и запретить движение в одном направленииз
           //
             
     }
@@ -323,6 +323,7 @@ if (window.screen.availWidth > 601) { // IPAD
 context.fillStyle='#FFFFFF';
 context.clearRect(0,0, 800, 800); 
 var song = $('#score-sound');
+var scoreSound = $('#pickUp-sound');
 var score = 0;//start_score.score;
 var count_of_hide_sausage = 0;
 context.fillText(score, score_x, score_y); 
@@ -336,7 +337,6 @@ var curXonPlatform = 0;
 var curYonPlatform = 0;
 $('.win-menu').css('display', 'none');
 window.pause = false;
-window.sound = true;
     
 function handleOrientation(event) {
     currentAngle = Math.floor(event.beta);
@@ -493,8 +493,9 @@ function setCatMovement() { // Основная функция
                 ((game_level.X[i]-curXonPlatform) > deltaX-dX )&&
                 ((game_level.Y[i]-curYonPlatform) > deltaY-dY )&&
                ((game_level.Y[i] - curYonPlatform) < deltaY)) {
-                    if (window.sound)
-                        song.get(0).play();
+                    if (window.sound) {
+                        scoreSound.get(0).play();
+                    }
                     game_level.Y[i]=7000;
                     game_level.SPEED[i]=0;
                     score++;
