@@ -8,7 +8,7 @@ function getLevel(level) {
         case 1:
             game_level.X = [250];
             game_level.Y = [0];
-            game_level.SPEED = [1];	
+            game_level.SPEED = [0.05];	
             game_level.number = 1;
             game_level.platform = false;
             break;
@@ -338,13 +338,33 @@ var curYonPlatform = 0;
 $('.win-menu').css('display', 'none');
 window.pause = false;
     
-function handleOrientation(event) {
+function handleOrientationGiro(event) {
     currentAngle = Math.floor(event.beta);
     if (currentAngle > 60) currentAngle = 60;
     if (currentAngle < -60) currentAngle = -60;
 }
+    
 
-window.addEventListener('deviceorientation', handleOrientation);
+    
+    
+function handleOrientationTouch(event) {
+    if (Math.random() < 0.5) { // Уменьшаем количество вычислений
+        var x = event.pageX;
+        var y = event.pageX;
+        console.log("coef = " + ((y-START_LEFT)/(x-START_TOP)));
+        console.log("x=",x," y=",y);
+        currentAngle = -Math.floor(Math.atan((y-START_LEFT)/(x-START_TOP))*180/Math.PI);
+        if (currentAngle > 40) currentAngle = 40;
+        if (currentAngle < -40) currentAngle = -40;
+    }
+}
+
+    window.control = "touch";
+if (window.control == "touch") {
+    window.addEventListener('touchmove', handleOrientationTouch);
+} else {
+    window.addEventListener('deviceorientation', handleOrientationGiro);
+}
 
 function moveLine() { // Переместить Сосиски
     for (var i = 0; i<game_level.Y.length; i++) {
@@ -362,28 +382,12 @@ function moveLine() { // Переместить Сосиски
         }
     }
 }
-/*    
-function moveLine() { // Переместить Сосиски
-    for (var i = 0; i<game_level.Y.length; i++) {
-        if ((game_level.Y[i] < 6999)&&(game_level.Y[i] < downPosSausage)) {
-            context.clearRect(game_level.X[i],game_level.Y[i], 50,30);
-            context.drawImage(sausage,game_level.X[i],game_level.Y[i]-400); !!!!!!!!!!!!!!!!!!!!
-            game_level.Y[i] += game_level.SPEED[i];
-        }
-        else {
-            if ((game_level.Y[i] >= downPosSausage)&&(game_level.Y[i] < 6999)) {
-                context.clearRect(game_level.X[i], 0, 50, 1000);
-                game_level.Y[i] = 7000;
-                game_level.SPEED[i] = 0;
-            }
-        }
-    }
-}*/
+
 
 function isLevelEnd() { // Проверка на завершения уровня
     count_of_hide_sausage = 0;
     for (var i = 0; i<game_level.Y.length; i++) {
-        console.log(game_level.Y[i]);
+        //console.log(game_level.Y[i]);
         if (game_level.Y[i]>5000)
             count_of_hide_sausage++;
     }

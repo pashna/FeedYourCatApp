@@ -1,6 +1,6 @@
-$("#main-cat").click(
+$("#main-cat").on('click touchstart', 
     function() {
-        var a = Math.floor(Math.random() * 3);
+        /*var a = Math.floor(Math.random() * 3);
         //a = 2;
         switch (a) {
             case 0: 
@@ -28,6 +28,7 @@ $("#main-cat").click(
                 }
                 break;
             
-        }
+        }*/
+        alert("CAT CLICKED");
     }
 )

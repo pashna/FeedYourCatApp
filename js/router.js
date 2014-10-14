@@ -62,40 +62,40 @@ $("#start-game__btn").on('click', function() {
 });
 
 
-$("#option-back-btn").on('click', function() {
+$("#option-back-btn").on('click touchstart', function() {
     $("#option").hide();
     showMainPage();
 });
 
-$("#menu-button_lose").on('click', function() {
+$("#menu-button_lose").on('click touchstart', function() {
     $("#game-over").hide();
     showLevelPage();
 });
 
-$("#replay-button_win").on('click', function() {
+$("#replay-button_win").on('click touchstart', function() {
    showGamePage(currentLevel); 
 });
 
-$("#replay-button_lose").on('click', function() {
+$("#replay-button_lose").on('click touchstart', function() {
     $("#game-over").hide();
     showGamePage(currentLevel); 
 });
 
-$("#lose-menu__menu-btn").on('click', function() {
+$("#lose-menu__menu-btn").on('click touchstart', function() {
     $("#game-over").hide();
     showMainPage(); 
 });
 
-$("#next-level").on('click', function() {
+$("#next-level").on('click touchstart', function() {
    showGamePage(++currentLevel); 
 });
 
-$("#win-menu__menu-btn").on('click', function() {
+$("#win-menu__menu-btn").on('click touchstart', function() {
     $("#win").hide();
     showLevelPage();
 });
 
-$("#option__btn").on('click', function() {
+$("#option__btn").on('click touchstart', function() {
    showOptionPage();
 });
 
@@ -103,7 +103,7 @@ $("#exit__btn").on('click', function() {
     alert("U rock!");
 });
 
-$("#memory").on('click', function() {
+$("#memory").on('click touchstart', function() {
     $("#memory").hide();
 })
 
@@ -128,6 +128,41 @@ function onDeviceReady(){
     intel.xdk.device.setRotateOrientation("landscape");
     intel.xdk.device.setAutoRotate(false);
 }
+
+$("#main-cat").on('click touchstart', 
+    function() {
+        var a = Math.floor(Math.random() * 3);
+        //a = 2;
+        switch (a) {
+            case 0: 
+                var deg = 0;
+                var interval = setInterval(function() {
+                        $("#main-cat").css('transform', "rotate("+deg+"deg)");
+                        deg+=1.5;
+                    }, 18);
+                setTimeout(function(){clearInterval(interval)}, 4500);
+                break;
+            case 1: 
+                $("#main-cat").animate({
+                    opacity: Math.random()
+                }, 1500 );
+                break;
+            case 2:
+                if (Math.random() > 0.5) {
+                    $("#main-cat").animate({
+                        "top": "+=20px"
+                    }, 1500 );
+                } else {
+                    $("#main-cat").animate({
+                        "bottom": "-=20px"
+                    }, 1500 );
+                }
+                break;
+            
+        }
+        //alert("CAT CLICKED");
+    }
+)
 
 
 /* 1111111111 1111111111 1111111111 1111111111 1111111111 1111111111 ОТЛАДКА
