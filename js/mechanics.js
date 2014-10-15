@@ -359,7 +359,6 @@ function handleOrientationTouch(event) {
     }
 }
 
-    window.control = "touch";
 if (window.control == "touch") {
     window.addEventListener('touchmove', handleOrientationTouch);
 } else {

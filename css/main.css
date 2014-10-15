@@ -212,10 +212,6 @@ body {
     background: rgba(255, 255, 255, 0.2); 
 }
 
-.toolbar__button:active {
-    background: white; 
-}
-
 .win-menu__button {
     display: inline-block;
     color: white;
@@ -445,9 +441,9 @@ body {
 .option {
     width: 50%;
     margin-left: 10%;
-    margin-left: 30%;
+    /*margin-left: 30%;*/
     height: 60%;
-    margin-top: 10%;
+    margin-top: 4%;
     font-size: 25px;
 }
 
@@ -461,13 +457,14 @@ body {
     width: 20%;
     margin-left: 38%;
     position: absolute;
-    bottom: 15%;
-    font-size: 30px;
+    bottom: 10%;
+    font-size: 20px;
 }
 
 .option-cell {
     width: 100%;
     margin-left: 30%;
+    margin-top: 3%;
     text-align: center;
 }
 
@@ -829,7 +826,7 @@ and (max-width : 568px){
     }*/
     
     .option {
-        margin-top: 19%;
+        margin-top: 10%;
     }
 
     .option-back-btn {
@@ -862,4 +859,25 @@ and (max-width : 568px){
     display: inline-block;
     margin-right: 20%;
     font-size: 30px;
+}
+
+.center {
+    text-align: center
+}
+
+.option-cell__control {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-size: 30px;
+    text-decoration: underline;
+}
+
+.option-control__variant {
+    margin-right: 50%;
+}
+
+.selected {
+    border: 2px solid;
+    padding: 3px;
+    border-radius: 6px;
 }

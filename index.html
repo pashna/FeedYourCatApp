@@ -129,44 +129,27 @@
             </div>
         </div>
     </div>
-    <!--
-    <div id="option">
-        <div class="option">
-            <p class="option-cell">
-                <input id="Meow" class="checkbox" type="checkbox" onchange='toogleSound("Meow")'/>
-                <label for="Meow" name="Meow-label" class="css-label">Effects</label>
-            </p>
-            <p class="option-cell">
-                <input id="Music" class="css-checkbox" type="checkbox" onchange='toogleSound("Music")'/>
-                <label for="Music" name="Music-label" class="css-label">Music</label>
-            </p>
-            <p class="option-cell">
-                <input id="Music1" class="css-checkbox" type="checkbox" onchange='toogleSound("Music")'/>
-                <label for="Music1" name="Music-label" class="css-label">Music</label>
-            </p>
-        </div>
-        <div class="replay-btn option-back-btn" id="option-back-btn">Back</div>
-    </div>-->
 
     <div id="option">
         <div class="option">
-            <p class="option-cell">
+            <div class="option-cell">
                 <div class="option-cell__text" onclick='toogleSound("Meow")'>Effects</div>
                 <div class="checkbox-container" onclick='toogleSound("Meow")'>
                     <img id="Meow" src="img/dark-plus-orange.png" class="checkbox"/>
                 </div>
-            </p>
-            <p class="option-cell">
+            </div>
+            <div class="option-cell">
                 <div class="option-cell__text" onclick='toogleSound("Music")'>Music</div>
                 <div class="checkbox-container" onclick='toogleSound("Music")'>
                     <img id="Music" src="img/dark-plus-orange.png" class="checkbox"/>
                 </div>
-            </p>
-            <!--<p class="option-cell
-">
-                <input id="Music" class="css-checkbox" type="checkbox" onchange='toogleSound("Music")'/>
-                <label for="Music" name="Music-label" class="css-label">Music</label>
-            </p>-->
+            </div>
+            <div class="option-cell">
+                <div class="option-cell__control">Control</div>
+                <div class="center">
+                    <span id="rotate_control" class="option-control__variant">Rotate</span><span id="touch_control">Touch</span>
+                </div>
+            </div>
         </div>
         <div class="replay-btn option-back-btn" id="option-back-btn">Back</div>
     </div>
@@ -182,7 +165,5 @@
     <script src="js/router.js"></script>
     <script src="js/levelsPagination.js"></script>
     <script src="js/mechanics.js"></script>
-    <!--<script src="js/joke.js"></script>    -->
-    <!--<script src="js/test.js"></script>-->
 </body>
 </html>

@@ -268,3 +268,31 @@ function handle(e) {
 
 window.addEventListener('*/
 //intel.xdk.device.setRotateOrientation("landscape");//, 200);
+
+/*
+Переключение управления
+*/
+if ((intel.xdk.cache.getCookie("control") == undefined)||
+    (intel.xdk.cache.getCookie("control") == "rotate")) {
+    $("#rotate_control").addClass("selected");
+    window.control = "rotate";
+    intel.xdk.cache.setCookie("control", "rotate", 9999);
+} else {
+    $("#touch_control").addClass("selected");
+    window.control = "touch";
+    intel.xdk.cache.setCookie("control", "touch", 9999);
+}
+
+$("#touch_control").on("click", function() {
+    $("#touch_control").addClass("selected");
+    window.control = "touch";
+    intel.xdk.cache.setCookie("control", "touch", 9999);
+    $("#rotate_control").removeClass("selected");
+})
+
+$("#rotate_control").on("click", function() {
+    $("#rotate_control").addClass("selected");
+    window.control = "rotate";
+    intel.xdk.cache.setCookie("control", "rotate", 9999);
+    $("#touch_control").removeClass("selected");
+})
